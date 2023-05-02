@@ -11,12 +11,6 @@ popupCloseButton.addEventListener('click', () => togglePopupState(popup));
 
 popupSubmitButton.addEventListener('click', () => togglePopupState(popup));
 
-popup.addEventListener('click', (evt) => {
-    if(evt.target == evt.currentTarget) {
-        togglePopupState(popup)
-    }
-});
-
 // Находим форму в DOM
 let formElement = document.querySelector('.popup');
 // Находим поля формы в DOM
