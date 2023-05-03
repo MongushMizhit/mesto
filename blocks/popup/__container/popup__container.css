@@ -7,15 +7,13 @@
     flex-direction: column;
     align-items: center;
     z-index: 1;
-    margin: 195px auto auto;
-    padding: 34px 0 37px;
+    padding: 34px 37px;
     position: relative;
 }
 
 @media screen and (max-width: 640px) {
     .popup__container {
         max-width: 282px;
-        margin: 123px auto auto;
-        padding: 25px 0 25px;
+        padding: 25px 25px;
     }
 }
