@@ -26,48 +26,16 @@
             <button class="profile__add-button" type="button"></button>
         </section>
         <section class="elements">
-            <article class="element">
-                <img class="element__image" src="./images/elbrus.jpg" alt="эльбрус">
-                <div class="element__info-container">
-                    <h2 class="element__title">Гора Эльбрус</h2>
-                    <button class="element__like-button" type="button"></button>
-                </div>
-            </article>
-            <article class="element">
-                <img class="element__image" src="./images/dombai.png" alt="домбай">
-                <div class="element__info-container">
-                    <h2 class="element__title">Домбай</h2>
-                    <button class="element__like-button" type="button"></button>
-                </div>
-            </article>
-            <article class="element">
-                <img class="element__image" src="./images/mongun-taiga.jpg" alt="монгун-тайга">
-                <div class="element__info-container">
-                    <h2 class="element__title">Монгун-Тайга</h2>
-                    <button class="element__like-button" type="button"></button>
-                </div>
-            </article>
-            <article class="element">
-                <img class="element__image" src="./images/aldyn-bulak.jpg" alt="алдын-булак">
-                <div class="element__info-container">
-                    <h2 class="element__title">Алдын-Булак</h2>
-                    <button class="element__like-button" type="button"></button>
-                </div>
-            </article>
-            <article class="element">
-                <img class="element__image" src="./images/tore-hol.jpg" alt="торе-хол">
-                <div class="element__info-container">
-                    <h2 class="element__title">Озеро Торе-Хол</h2>
-                    <button class="element__like-button" type="button"></button>
-                </div>
-            </article>
-            <article class="element">
-                <img class="element__image" src="./images/ozero-azas.jpg" alt="азас">
-                <div class="element__info-container">
-                    <h2 class="element__title">Озеро Азас</h2>
-                    <button class="element__like-button" type="button"></button>
-                </div>
-            </article>
+            <template id="element-template">
+                <article class="element">
+                        <img class="element__image" src="" alt="">
+                        <button class="element__delete-button" type="button"></button>
+                    <div class="element__info-container">
+                        <h2 class="element__title"></h2>
+                        <button class="element__like-button" type="button"></button>
+                    </div>
+                </article>
+            </template>
         </section>
     </main>
     <footer class="footer">
@@ -82,6 +50,24 @@
                 <input class="popup__input popup__input_type_job" type="text" name="job" placeholder="Род деятельности" required>
                 <button class="popup__submit-button" type="submit">Сохранить</button>
             </form>
+        </div>
+    </div>
+    <div class="popup item-popup">
+        <div class="popup__container">
+            <button class="popup__close-button item__close-button" type="button"></button>
+            <form class="popup__form" name="add-form">
+                <h2 class="popup__title">Новое место</h2>
+                <input class="popup__input popup__input_type_title" type="text" name="title" placeholder="Название" required>
+                <input class="popup__input popup__input_type_link" type="text" name="link" placeholder="Ссылка на картинку" required>
+                <button class="popup__submit-button" type="submit">Создать</button>
+            </form>
+        </div>
+    </div>
+    <div class="popup popup-photo">
+        <div class="popup__image-container">
+            <img class="popup__image" src="#" alt="">
+            <p class="popup__image-caption"></p>
+            <button class="popup__close-button popup-photo__close-button" type="button"></button>
         </div>
     </div>
     <script src="./scripts/index.js"></script>
