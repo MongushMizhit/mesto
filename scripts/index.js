@@ -120,13 +120,11 @@ popupProfileCloseButton.addEventListener('click', () => closePopup(popupProfile)
 
 addButtonOpen.addEventListener('click', () => {
   openPopup(cardPopup);
-  cardPopup.classList.add('popup_opened');
 });
 
 
 cardPopupCloseButton.addEventListener('click', () => {
   closePopup(cardPopup);
-  cardPopup.classList.remove('popup_opened');
 });
 
 
