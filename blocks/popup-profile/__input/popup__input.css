@@ -23,6 +23,10 @@
     font-family: inherit;
 }
 
+.popup__input:invalid:not(:focus):not(:placeholder-shown) {
+    border-bottom: 1px solid red;
+  } 
+
 @media screen and (max-width: 640px) {
     .popup__input {
         max-width: 238px;
