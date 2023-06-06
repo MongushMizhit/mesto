@@ -2,12 +2,14 @@
     width: 358px;
     height: 50px;
     border-radius: 2px;
+    background: #000000;
     color: #FFFFFF;
     font-weight: 400;
     font-size: 18px;
     line-height: 22px;
     margin-top: 0px;
     border: none;
+    cursor: default;
 }
 
 @media screen and (max-width: 640px) {
@@ -20,8 +22,3 @@
     }
 }
 
-.popup__submit-button:hover {
-    cursor: pointer;
-    opacity: .8;
-    transition: opacity .2s linear;
-}

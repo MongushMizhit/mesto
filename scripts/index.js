@@ -22,6 +22,7 @@ const profileDescription = document.querySelector('.profile__description');
 const titleInput = popupCard.querySelector('.popup__input_type_title');
 const linkInput = popupCard.querySelector('.popup__input_type_link');
 const cardTemplateElement = document.querySelector('#element-template');
+const submitButton = document.querySelector('.popup__submit-button');
 
 const settings = {
   formSelector: '.popup__form',
@@ -81,18 +82,27 @@ function handleProfileFormSubmit(evt) {
   closePopup(popupProfile);
 }
 
-function handleAddFormSubmit(event) {
-  event.preventDefault();
+function handleAddFormSubmit(event) { 
+  event.preventDefault(); 
+ 
+  const title = titleInput.value; 
+  const link = linkInput.value; 
+  
+  if (title.trim() !== '' && link.trim() !== '') {
+    addCard(title, link); 
+    closePopup(popupCard); 
+  }
+} 
 
-  const title = titleInput.value;
-  const link = linkInput.value;
+function isInputValid(inputElement) {
 
-  if (isInputValid(titleInput) && isInputValid(linkInput)) {
-    addCard(title, link);
-    event.currentTarget.reset();
-    closePopup(popupCard);
+  if (inputElement.validity.valid) {
+    return true;
+  } else {
+    return false;
   }
 }
+
 
 function addCard(title, link) {
   const newCard = createCard(title, link);
@@ -115,28 +125,28 @@ popupProfileOpenButton.addEventListener('click', () => {
 
 popupProfileCloseButton.addEventListener('click', () => closePopup(popupProfile));
 
-  addButtonOpen.addEventListener('click', () => {
-    openPopup(popupCard);
-  });
+addButtonOpen.addEventListener('click', () => {
+  openPopup(popupCard);
+});
 
-  cardPopupCloseButton.addEventListener('click', () => {
-    closePopup(popupCard);
-  });
+cardPopupCloseButton.addEventListener('click', () => {
+  closePopup(popupCard);
+});
 
-  addForm.addEventListener('submit', handleAddFormSubmit);
-  formProfileElement.addEventListener('submit', handleProfileFormSubmit);
+addForm.addEventListener('submit', handleAddFormSubmit);
+formProfileElement.addEventListener('submit', handleProfileFormSubmit);
 
 function handleEscKeyPress(event) {
-    const key = event.key;
-    const isEscapeKey = key === 'Escape' || key === 'Esc';
+  const key = event.key;
+  const isEscapeKey = key === 'Escape' || key === 'Esc';
   
-    if (isEscapeKey) {
-      const openedPopup = document.querySelector('.popup_opened');
-      if (openedPopup) {
-        closePopup(openedPopup);
-      }
+  if (isEscapeKey) {
+    const openedPopup = document.querySelector('.popup_opened');
+    if (openedPopup) {
+      closePopup(openedPopup);
     }
   }
+}
 
 photoCloseButton.addEventListener('click', () => closePopup(popupPhoto));
 

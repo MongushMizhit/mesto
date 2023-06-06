@@ -47,7 +47,11 @@ function hideError(formElement, inputElement, settings) {
 }
 
 function toggleButtonChangeState(formElement, settings, buttonElement) {
-  if (!formElement.checkValidity()) {
+  const inputList = Array.from(formElement.querySelectorAll(settings.inputSelector));
+  const isAnyInputEmpty = inputList.some((inputElement) => inputElement.value.trim() === '');
+  const isAnyInputInvalid = inputList.some((inputElement) => !isInputValid(inputElement));
+
+  if (isAnyInputEmpty || isAnyInputInvalid) {
     buttonElement.setAttribute('disabled', 'true');
     buttonElement.classList.add(settings.inactiveButtonClass);
     buttonElement.classList.remove('popup__submit-button_valid');
@@ -57,10 +61,6 @@ function toggleButtonChangeState(formElement, settings, buttonElement) {
     buttonElement.classList.add('popup__submit-button_valid');
   }
 }
-
-const formElement = document.querySelector(settings.formSelector);
-const buttonElement = formElement.querySelector(settings.submitButtonSelector);
-toggleButtonChangeState(formElement, settings, buttonElement);
 
   
   
