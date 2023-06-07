@@ -83,14 +83,6 @@ function handleProfileFormSubmit(evt) {
   closePopup(popupProfile);
 }
 
-function openAddCardPopup() {
-  const submitButton = addForm.querySelector(settings.submitButtonSelector);
-
-  submitButton.disabled = true;
-  submitButton.classList.add(settings.inactiveButtonClass);
-  submitButton.classList.remove(settings.validButtonClass);
-}
-
 function handleAddFormSubmit(event) { 
   event.preventDefault(); 
  
