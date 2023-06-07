@@ -54,11 +54,20 @@ function toggleButtonChangeState(formElement, settings, buttonElement) {
   if (isAnyInputEmpty || isAnyInputInvalid) {
     buttonElement.setAttribute('disabled', 'true');
     buttonElement.classList.add(settings.inactiveButtonClass);
-    buttonElement.classList.remove('popup__submit-button_valid');
+    buttonElement.classList.remove(settings.validButtonClass);
   } else {
     buttonElement.removeAttribute('disabled');
     buttonElement.classList.remove(settings.inactiveButtonClass);
-    buttonElement.classList.add('popup__submit-button_valid');
+    buttonElement.classList.add(settings.validButtonClass);
+  }
+}
+
+function isInputValid(inputElement) {
+
+  if (inputElement.validity.valid) {
+    return true;
+  } else {
+    return false;
   }
 }
 

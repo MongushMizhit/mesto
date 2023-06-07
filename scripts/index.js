@@ -30,7 +30,8 @@ const settings = {
   submitButtonSelector: '.popup__submit-button',
   inactiveButtonClass: 'popup__submit-button_invalid',
   inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
+  errorClass: 'popup__error_visible',
+  validButtonClass: 'popup__submit-button_valid'
 };
 
 initializeValidation(settings);
@@ -82,27 +83,35 @@ function handleProfileFormSubmit(evt) {
   closePopup(popupProfile);
 }
 
+function openAddCardPopup() {
+  const submitButton = addForm.querySelector(settings.submitButtonSelector);
+
+  submitButton.disabled = true;
+  submitButton.classList.add(settings.inactiveButtonClass);
+  submitButton.classList.remove(settings.validButtonClass);
+}
+
 function handleAddFormSubmit(event) { 
   event.preventDefault(); 
  
   const title = titleInput.value; 
   const link = linkInput.value; 
   
-  if (title.trim() !== '' && link.trim() !== '') {
-    addCard(title, link); 
-    closePopup(popupCard); 
-  }
-} 
+  if (isInputValid(titleInput) && isInputValid(linkInput)) {
+    addCard(title, link);
+    event.currentTarget.reset();
+    closePopup(popupCard);
 
-function isInputValid(inputElement) {
-
-  if (inputElement.validity.valid) {
-    return true;
+    const submitButton = addForm.querySelector(settings.submitButtonSelector);
+    submitButton.disabled = true;
+    submitButton.classList.add(settings.inactiveButtonClass);
+    submitButton.classList.remove(settings.validButtonClass);
   } else {
-    return false;
+    submitButton.disabled = true;
+    submitButton.classList.add(settings.inactiveButtonClass);
+    submitButton.classList.remove(settings.validButtonClass);
   }
 }
-
 
 function addCard(title, link) {
   const newCard = createCard(title, link);
