@@ -1,5 +1,5 @@
 class FormValidator {
-  constructor(settings, formElement) {
+  constructor(settings, formElement, addCard) {
     this._formElement = formElement;
     this._inputSelector = settings.inputSelector;
     this._submitButtonSelector = settings.submitButtonSelector;
@@ -7,6 +7,9 @@ class FormValidator {
     this._validButtonClass = settings.validButtonClass;
     this._inputErrorClass = settings.inputErrorClass;
     this._errorClass = settings.errorClass;
+    this._addCard = addCard;
+    this._titleInput = document.querySelector('.popup__input_type_title');
+    this._linkInput = document.querySelector('.popup__input_type_link');
   }
 
   _showInputError(inputElement, errorMessage) {
@@ -47,8 +50,8 @@ class FormValidator {
   _handleProfileSubmitButton(evt) {
     evt.preventDefault();
     if (this._formElement.checkValidity()) {
-      const nameInput = this._formElement.querySelector('.popup__input_type_name');
-      const jobInput = this._formElement.querySelector('.popup__input_type_job');
+      const nameInput = this._formElement.querySelector('#name-card');
+      const jobInput = this._formElement.querySelector('#job-card');
       const currentName = nameInput.value;
       const currentJob = jobInput.value;
       
@@ -64,13 +67,10 @@ class FormValidator {
   _handleAddFormSubmit(evt) { 
     evt.preventDefault(); 
   
-    const titleInput = this._formElement.querySelector('.popup__input_type_title');
-    const linkInput = this._formElement.querySelector('.popup__input_type_link');
-    const title = titleInput.value; 
-    const link = linkInput.value;
-  
-    // Вызов функции addCard для добавления новой карточки
-  
+    this._title = this._titleInput.value; 
+    this._link = this._linkInput.value;
+    
+    this._addCard({ name: this._title, link: this._link });
     // Очистка формы
     this._formElement.reset();
   
@@ -97,12 +97,16 @@ class FormValidator {
   }
 
   enableValidation() {
+    this._formElement.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+    });
+
     this._setEventListeners();
-  }
+  };
 }
 
 export default FormValidator;
 
-  
+
   
   

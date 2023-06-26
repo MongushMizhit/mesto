@@ -105,7 +105,7 @@ class Card {
     this._popupPhoto.classList.remove('popup_opened');
     document.removeEventListener('keydown', this._handleEscKeyPress);
   }
-
+  
   _handleEscKeyPress(event) {
     if (event.key === 'Escape') {
       this._closePhotoPopup();
@@ -118,9 +118,10 @@ class Card {
     this._element = this._getTemplate();
     this._element.querySelector('.element__title').textContent = this._name;
     this._element.querySelector('.element__image').src = this._link;
+
     this._setEventListeners();
     return this._element;
-  }
+  };
 
   generateCard() {
     this._element = this._getTemplate();
@@ -131,5 +132,4 @@ class Card {
     return this._element;
   }
 }
-
 export default Card;

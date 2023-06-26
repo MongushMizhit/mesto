@@ -1,7 +1,6 @@
 import Card from './card.js';
 import FormValidator from './FormValidator.js';
 
-
 const initialCards = [
   {
     name: 'Алдын-Булак',
@@ -35,8 +34,7 @@ const photoImage = document.querySelector('.popup__image');
 const photoCaption = document.querySelector('.popup__image-caption');
 const popupPhoto = document.querySelector('.popup-photo');
 const formElement = document.querySelector('.popup__form');
-
-
+const addFormElement = document.querySelector('#card-popup__form');
 
 initialCards.forEach(addCard);
 
@@ -49,13 +47,14 @@ const settings = {
   validButtonClass: 'popup__submit-button_valid'
 };
 
-function addCard(cardData) {
-  const card = new Card(cardData, cardTemplate, photoImage, photoCaption, popupPhoto);
-  const cardElement = card.createCard();
-  cardsContainer.append(cardElement);
-};
+const formValidatorAdd = new FormValidator(settings, addFormElement, addCard);
+formValidatorAdd.enableValidation();
 
 const formValidator = new FormValidator(settings, formElement);
 formValidator.enableValidation();
 
-
+function addCard(cardData) {
+  const card = new Card(cardData, cardTemplate, photoImage, photoCaption, popupPhoto);
+  const cardElement = card.createCard();
+  cardsContainer.prepend(cardElement);
+};
