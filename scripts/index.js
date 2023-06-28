@@ -139,8 +139,8 @@ function handleProfileSubmitButton(evt) {
   evt.preventDefault();
   if (formElement.checkValidity()) {
 
-    currentName.textContent = nameInput.value; // Сохранение нового значения имени
-    currentJob.textContent = jobInput.value; // Сохранение нового значения работы
+    currentName.textContent = nameInput.value; 
+    currentJob.textContent = jobInput.value;
 
     formValidator._toggleButtonState(); 
     closePopup(popup);
@@ -154,10 +154,7 @@ function handleAddFormSubmit(evt) {
   const link = linkInput.value;
 
   addCard({ name: title, link: link });
-
   evt.currentTarget.reset();
-
   formValidator._toggleButtonState();
-
   closePopup(popupCard);
 }
