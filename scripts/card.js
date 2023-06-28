@@ -24,8 +24,8 @@ class Card {
     likeButton.classList.toggle('element__like-button_active');
   }
 
-  _handleDeleteButtonClick(event) {
-    const card = event.target.closest('.element');
+  _handleDeleteButtonClick(evt) {
+    const card = evt.target.closest('.element');
     card.remove();
   }
 
@@ -41,13 +41,10 @@ class Card {
   }
 
   _setEventListeners() {
-    this._element.querySelector('.element__like-button')
-      .addEventListener('click', this._handleLikeButtonClick);
-    this._element.querySelector('.element__delete-button')
-      .addEventListener('click', this._handleDeleteButtonClick);
-    this._element.querySelector('.element__image')
-      .addEventListener('click', this._handleImageClick.bind(this));
-  };
+    this._element.querySelector('.element__like-button').addEventListener('click', this._handleLikeButtonClick);
+    this._element.querySelector('.element__delete-button').addEventListener('click', this._handleDeleteButtonClick);
+    this._element.querySelector('.element__image').addEventListener('click', this._handleImageClick.bind(this));
+  }
 
   createCard() {
     this._element = this._getTemplate();
@@ -56,7 +53,7 @@ class Card {
     this._element.querySelector('.element__title').alt = this._name;
     this._setEventListeners();
     return this._element;
-  };
+  }
 
   generateCard() {
     this._element = this._getTemplate();
@@ -66,6 +63,6 @@ class Card {
     this._setEventListeners();
     return this._element;
   }
-};
+}
 
 export default Card;
