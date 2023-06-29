@@ -7,6 +7,9 @@ class Card {
       this._photoCaption = photoCaption;
       this._popupPhoto = popupPhoto;
       this._openPopup = openPopup;
+
+      this._element = this._getTemplate();
+      this._elementImage = this._element.querySelector('.element__image');
     }
     
     _getTemplate() {
@@ -41,25 +44,15 @@ class Card {
     }
   
     _setEventListeners() {
-      this._element.querySelector('.element__like-button').addEventListener('click', this._handleLikeButtonClick);
-      this._element.querySelector('.element__delete-button').addEventListener('click', this._handleDeleteButtonClick);
-      this._element.querySelector('.element__image').addEventListener('click', this._handleImageClick.bind(this));
+      this._element.querySelector('.element__like-button').addEventListener('click', this._handleLikeButtonClick.bind(this));
+      this._element.querySelector('.element__delete-button').addEventListener('click', this._handleDeleteButtonClick.bind(this));
+      this._elementImage.addEventListener('click', this._handleImageClick.bind(this));
     }
   
     createCard() {
-      this._element = this._getTemplate();
       this._element.querySelector('.element__title').textContent = this._name;
-      this._element.querySelector('.element__image').src = this._link;
+      this._elementImage.src = this._link;
       this._element.querySelector('.element__title').alt = this._name;
-      this._setEventListeners();
-      return this._element;
-    }
-  
-    generateCard() {
-      this._element = this._getTemplate();
-      this._photoImage = this._element.querySelector('.popup__image');
-      this._photoCaption = this._element.querySelector('.popup__image-caption');
-      this._popupPhoto = document.querySelector('.popup-photo');
       this._setEventListeners();
       return this._element;
     }
