@@ -31,7 +31,14 @@ class FormValidator {
     }
   }
 
-  _toggleButtonState() { 
+  disableSubmitButton() {
+    const submitButton = this._formElement.querySelector(this._submitButtonSelector);
+    submitButton.disabled = true;
+    submitButton.classList.add(this._inactiveButtonClass);
+    submitButton.classList.remove(this._validButtonClass);
+  }
+
+  toggleButtonState() { 
     const submitButton = this._formElement.querySelector(this._submitButtonSelector); 
     if (this._formElement.checkValidity()) { 
       submitButton.classList.remove(this._inactiveButtonClass); 
@@ -50,7 +57,7 @@ class FormValidator {
     inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._checkInputValidity(inputElement);
-        this._toggleButtonState();
+        this.toggleButtonState();
       });
     });
   }
