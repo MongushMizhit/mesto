@@ -1,6 +1,15 @@
 import Card from './Card.js'
 import FormValidator from './FormValidator.js'
 
+const settings = {
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit-button',
+  inactiveButtonClass: 'popup__submit-button_invalid',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible',
+  validButtonClass: 'popup__submit-button_valid'
+};
+
 const initialCards = [
   {
     name: 'Алдын-Булак',
@@ -58,17 +67,7 @@ profileEditButton.addEventListener('click', function() {
 });
 
 profileAddButton.addEventListener('click', function() {
-  const submitButton = addFormElement.querySelector(settings.submitButtonSelector);
-
-  if (titleInput.value === '' || linkInput.value === '') {
-      submitButton.disabled = true;
-      submitButton.classList.add(settings.inactiveButtonClass);
-      submitButton.classList.remove(settings.validButtonClass);
-    } else {
-      submitButton.disabled = true;
-      submitButton.classList.add(settings.inactiveButtonClass);
-      submitButton.classList.remove(settings.validButtonClass);
-    }
+  formValidatorAdd.disableSubmitButton();
   openPopup(popupCard);
 });
 
@@ -111,15 +110,6 @@ function handleOverlayClose(evt) {
 
 initialCards.forEach(addCard);
 
-const settings = {
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__submit-button',
-  inactiveButtonClass: 'popup__submit-button_invalid',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible',
-  validButtonClass: 'popup__submit-button_valid'
-};
-
 const formValidatorAdd = new FormValidator(settings, addFormElement);
 formValidatorAdd.enableValidation();
 
@@ -142,7 +132,7 @@ function handleProfileSubmitButton(evt) {
     currentName.textContent = nameInput.value; 
     currentJob.textContent = jobInput.value;
 
-    formValidator._toggleButtonState(); 
+    formValidator.toggleButtonState(); 
     closePopup(popup);
   }
 }
@@ -155,6 +145,6 @@ function handleAddFormSubmit(evt) {
 
   addCard({ name: title, link: link });
   evt.currentTarget.reset();
-  formValidator._toggleButtonState();
+  formValidator.toggleButtonState();
   closePopup(popupCard);
 }
