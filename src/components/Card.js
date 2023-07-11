@@ -1,12 +1,12 @@
 class Card {
-    constructor(data, cardSelector, photoImage, photoCaption, popupPhoto, openPopup) {
+    constructor(data, cardSelector, photoImage, photoCaption, popupPhoto, handleCardClick) {
       this._name = data.name;
       this._link = data.link;
       this._cardSelector = cardSelector;
       this._photoImage = photoImage;
       this._photoCaption = photoCaption;
       this._popupPhoto = popupPhoto;
-      this._openPopup = openPopup;
+      this._handleCardClick = handleCardClick;
 
       this._element = this._getTemplate();
       this._elementImage = this._element.querySelector('.element__image');
@@ -37,7 +37,6 @@ class Card {
       const card = imageElement.closest('.element');
       const name = card.querySelector('.element__title').textContent;
       const link = imageElement.getAttribute('src');
-      this._openPopup(this._popupPhoto);
       this._photoImage.src = link;
       this._photoImage.alt = name;
       this._photoCaption.textContent = name;
@@ -46,7 +45,9 @@ class Card {
     _setEventListeners() {
       this._element.querySelector('.element__like-button').addEventListener('click', this._handleLikeButtonClick.bind(this));
       this._element.querySelector('.element__delete-button').addEventListener('click', this._handleDeleteButtonClick.bind(this));
-      this._elementImage.addEventListener('click', this._handleImageClick.bind(this));
+      this._elementImage.addEventListener('click', () => {
+        this._handleCardClick(this._name, this._link);
+      });
     }
   
     createCard() {

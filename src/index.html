@@ -6,20 +6,20 @@
     <meta name="description" content="Проектная работа на Яндекс-Практикум">
     <meta name="keywords" content="html, css, js">
     <meta name="author" content="Мижит Монгуш">
-    <link rel="stylesheet" href="./pages/index.css">
+    
     <title>Mesto</title>
 </head>
 <body class="page">
     <header class="header">
-        <img class="header__logo" src="./images/header-logo.svg" alt="Лого">
+        <img class="header__logo" src="<%=require('./images/header-logo.svg')%>" alt="Лого">
     </header>
     <main class="main">
         <section class="profile">
-            <img class="profile__avatar" src="./images/avatar.jpg" alt="аватар">
+            <img class="profile__avatar" src="<%=require('./images/pascal.jpg')%>" alt="аватар">
             <div class="profile__info">
                 <div class="profile__info-container">
-                    <h1 class="profile__nickname">Жак-Ив Кусто</h1>
-                    <p class="profile__description">Исследователь океана</p>
+                    <h1 class="profile__nickname">Педро Паскаль</h1>
+                    <p class="profile__description">Актер, Продюсер</p>
                 </div>
                 <button class="profile__edit-button profile__button-opened" type="button"></button>
             </div>
@@ -74,8 +74,6 @@
             <button class="popup__close-button popup__close-button_photo" type="button"></button>
         </div>
     </div>
-    <script type="module" src="./scripts/Card.js"></script>
-    <script type="module" src="./scripts/FormValidator.js"></script>
-    <script type="module" src="./scripts/index.js"></script>
+    
 </body>
 </html>
