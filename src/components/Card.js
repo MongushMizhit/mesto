@@ -1,11 +1,11 @@
 class Card {
-    constructor(data, cardSelector, photoImage, photoCaption, popupPhoto, handleCardClick) {
+    constructor(data, cardSelector, photoImage, photoCaption, popupWithImage, handleCardClick) {
       this._name = data.name;
       this._link = data.link;
       this._cardSelector = cardSelector;
       this._photoImage = photoImage;
       this._photoCaption = photoCaption;
-      this._popupPhoto = popupPhoto;
+      this._popupWithImage = popupWithImage;
       this._handleCardClick = handleCardClick;
 
       this._element = this._getTemplate();
@@ -53,7 +53,7 @@ class Card {
     createCard() {
       this._element.querySelector('.element__title').textContent = this._name;
       this._elementImage.src = this._link;
-      this._element.querySelector('.element__title').alt = this._name;
+      this._elementImage.alt = this._name;
       this._setEventListeners();
       return this._element;
     }

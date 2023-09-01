@@ -24,6 +24,11 @@ class PopupWithForm extends Popup {
       this._submitCallback(inputValues);
     });
   }
+
+  close() {
+    super.close();
+    this._form.reset();
+  }
 }
 
 export default PopupWithForm;
