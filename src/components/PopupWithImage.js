@@ -14,7 +14,6 @@ class PopupWithImage extends Popup {
     this._photoImage.src = link;
     this._photoImage.alt = name;
     this._photoCaption.textContent = name;
-    this.setEventListeners()
   }
 }
 
