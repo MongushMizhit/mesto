@@ -7,7 +7,7 @@ class Card {
       this._photoImage = photoImage;
       this._photoCaption = photoCaption;
       this._popupWithImage = popupWithImage;
-      this.handleCardClick = handleCardClick;
+      this._handleCardClick = handleCardClick;
       this.handleLikeClick = handleLikeClick; 
       this._cardId = data._id;
       this._like = data.likes.length
