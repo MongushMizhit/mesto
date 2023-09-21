@@ -1,7 +1,8 @@
 class UserInfo {
-    constructor({ nameSelector, infoSelector }) {
+    constructor({ nameSelector, infoSelector, avatarSelector }) {
       this._nameElement = document.querySelector(nameSelector);
       this._infoElement = document.querySelector(infoSelector);
+      this._avatarElement = document.querySelector(avatarSelector);
     }
   
     getUserInfo() {
@@ -11,11 +12,15 @@ class UserInfo {
       };
     }
   
-    setUserInfo({ name, info }) {
+    setUserInfo({ name, about }) {
       this._nameElement.textContent = name;
-      this._infoElement.textContent = info;
+      this._infoElement.textContent = about;
+    }
+
+    /**Функция добавления ссылки на новую картинку аватара */
+    setUserAvatar( url ) {
+      this._avatarElement.src = url.avatar
     }
   }
   
   export default UserInfo;
-  
