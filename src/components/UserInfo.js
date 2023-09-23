@@ -17,9 +17,8 @@ class UserInfo {
       this._infoElement.textContent = about;
     }
 
-    /**Функция добавления ссылки на новую картинку аватара */
-    setUserAvatar( url ) {
-      this._avatarElement.src = url.avatar
+    setUserAvatar(avatarUrl) {
+      this._avatarElement.src = avatarUrl;
     }
   }
   
