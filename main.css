@@ -902,9 +902,12 @@ template {
         margin-top: 75px;
     }
 }
+.popup__label {
+    margin: 0 0 10px;
+    width: 100%;
+}
 .popup__input-avatar {
     width: 98%;
-    margin-bottom: 48px;
 }
 .popup__submit-button {
     width: 358px;
