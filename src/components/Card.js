@@ -61,8 +61,7 @@ class Card {
       this._toggleDeleteButton();
       this._setEventListeners();
       
-
-      this.updateLikes(this._like);
+      this.updateLikes(this._likes.length);
       return this._element;
     }
 
@@ -118,17 +117,18 @@ class Card {
         })
     };
 
-    addLike() {
+    addLike(data) {
       this._likeButton.classList.add('element__like-button_active');
-      this._likes.length += 1;
-      this._refreshLikes();
-  }
-
-    unlikeCard() {
+      this._likes = data.likes;
+      this._refreshLikes(this._likes.length);
+    }
+    
+    unlikeCard(data) {
       this._likeButton.classList.remove('element__like-button_active');
-      this._likes.length -= 1;
-      this._refreshLikes();
-  }
+      this._likes = data.likes;
+      this._refreshLikes(this._likes.length);
+    }
+    
 
     getCardElement() {
       return this._element;

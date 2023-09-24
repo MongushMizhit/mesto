@@ -44,12 +44,16 @@ const api = new Api({
 });
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
-  .then(([userInfo, cardsData]) => {
+  .then(([userData, cardsData]) => {
+    
     // Данные о пользователе
-    userNameElement.textContent = userInfo.name;
-    userAboutElement.textContent = userInfo.about;
-    userAvatarElement.src = userInfo.avatar;
-    currentUser = userInfo;
+    userInfo.setUserInfo({
+      name: userData.name,
+      about: userData.about,
+      avatar: userData.avatar
+    });
+
+    currentUser = userData;
 
     // Создание и отрисовка карточек
     const reversedCardsData = cardsData.reverse();
@@ -67,8 +71,8 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
 
 popupWithAvatarForm.setEventListeners();
 popupDelete.setEventListeners();
-popupWithProfileForm.setEventListeners(handleProfileFormSubmit);
-popupWithCardForm.setEventListeners(handleAddFormSubmit);
+popupWithProfileForm.setEventListeners();
+popupWithCardForm.setEventListeners();
 popupWithImage.setEventListeners();
 
 
@@ -107,8 +111,8 @@ function createCard(item) {
     
   }, cardTemplate, (cardId) => {
     api.likeCard(cardId)
-        .then(() => {
-            card.addLike();
+        .then((data) => {
+            card.addLike(data);
         })
         .catch((error) => {
             console.log(error)
@@ -117,8 +121,8 @@ function createCard(item) {
     },
 (cardId) => {
     api.dislikeCard(cardId)
-        .then(() => {
-            card.unlikeCard();
+        .then((data) => {
+            card.unlikeCard(data);
         })
         .catch((error) => {
             console.log(error)
@@ -145,12 +149,6 @@ function createCard(item) {
   handleCardClick,  currentUser);
   
   const cardElement = card.createCard();
-  
-  cardElement.dataset.id = item._id;
-
-  const likeCountElement = cardElement.querySelector('.element__like-number');
-  likeCountElement.textContent = item.likes.length; 
-  
   return cardElement;
 }
 
@@ -159,14 +157,13 @@ const handleCardClick = (name, link) => {
   popupWithImage.open(name, link);
 };
 
-function handleAvatarFormSubmit() {
-  const newAvatarLink = popupWithAvatarForm.getInputValues().nickname;
+function handleAvatarFormSubmit(inputValues) {
+  const newAvatarLink = inputValues.nickname;
   avatarSubmitBtn.textContent = 'Сохранение...';
   api.updateAvatar(newAvatarLink)
     .then(() => {
-
       userInfo.setUserAvatar(newAvatarLink);
-
+      popupWithAvatarForm.close();
     })
     .catch((error) => {
       console.error('Ошибка при обновлении аватара:', error);
@@ -174,7 +171,6 @@ function handleAvatarFormSubmit() {
     .finally(() => {
       // Возвращаем кнопке исходный текст
       avatarSubmitBtn.textContent = 'Сохранить';
-      popupWithAvatarForm.close();
     });
 }
 
@@ -185,6 +181,7 @@ function handleProfileFormSubmit(inputValues) {
   api.updateProfileInfo(name, about)
     .then((userData) => {
       userInfo.setUserInfo(userData);
+      popupWithProfileForm.close();
     })
     .catch((error) => {
       console.error(error);
@@ -192,7 +189,6 @@ function handleProfileFormSubmit(inputValues) {
     .finally(() => {
       // Возвращаем кнопке исходный текст
       profileSubmitBtn.textContent = 'Сохранить';
-      popupWithProfileForm.close();
     });
 };
 
@@ -203,6 +199,7 @@ function handleAddFormSubmit(inputValues) {
     .then((cardData) => {
       const cardElement = createCard(cardData);
       cardsList.addItem(cardElement);
+      popupWithCardForm.close();
     })
     .catch((err) => {
       console.error(err);
@@ -210,7 +207,6 @@ function handleAddFormSubmit(inputValues) {
     .finally(() => {
       // Возвращаем кнопке исходный текст
       cardSubmitBtn.textContent = 'Создать';
-      popupWithCardForm.close();
     });
 }
 

@@ -12,13 +12,14 @@ class UserInfo {
       };
     }
   
-    setUserInfo({ name, about }) {
+    setUserInfo({ name, about, avatar }) {
       this._nameElement.textContent = name;
       this._infoElement.textContent = about;
+      this._avatarElement.src = avatar;
     }
 
-    setUserAvatar(avatarUrl) {
-      this._avatarElement.src = avatarUrl;
+    setUserAvatar(avatar) {
+      this._avatarElement.src = avatar;
     }
   }
   
