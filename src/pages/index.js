@@ -1,4 +1,4 @@
-let currentUser;
+let userId;
 
 import Card from '../components/Card.js'
 import FormValidator from '../components/FormValidator.js'
@@ -27,13 +27,11 @@ const userInfo = new UserInfo({
 const cardsList = new Section({
   items: [], 
   renderer: (cardData) => {
-    // Функция для создания и отображения карточки
     const cardElement = createCard(cardData);
     cardsList.addItem(cardElement);
   },
 }, '.elements');
 
-cardsList.renderItems();
 
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-75',
@@ -53,16 +51,10 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
       avatar: userData.avatar
     });
 
-    currentUser = userData;
+    userId = userData;
 
     // Создание и отрисовка карточек
-    const reversedCardsData = cardsData.reverse();
-    reversedCardsData.forEach((cardData) => {
-      const cardElement = createCard(cardData);
-      cardsList.addItem(cardElement);
-    });
-
-    cardsList.renderItems();
+    cardsList.renderItems(cardsData);
   })
   .catch((error) => {
     console.error('Ошибка при загрузке данных:', error);
@@ -109,7 +101,10 @@ function createCard(item) {
     likes: item.likes, 
     owner: item.owner,
     
-  }, cardTemplate, (cardId) => {
+  }, cardTemplate, () => {
+    popupWithImage.open(item.name, item.link);
+  },
+    (cardId) => {
     api.likeCard(cardId)
         .then((data) => {
             card.addLike(data);
@@ -146,16 +141,12 @@ function createCard(item) {
       
   popupDelete.open();
 }, 
-  handleCardClick,  currentUser);
+ userId);
   
   const cardElement = card.createCard();
   return cardElement;
 }
 
-
-const handleCardClick = (name, link) => {
-  popupWithImage.open(name, link);
-};
 
 function handleAvatarFormSubmit(inputValues) {
   const newAvatarLink = inputValues.nickname;

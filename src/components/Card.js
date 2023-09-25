@@ -1,5 +1,5 @@
 class Card {
-    constructor(data, cardSelector, handleLikeClick, handleDislikeClick, handleDeleteClick, handleCardClick, currentUser) {
+    constructor(data, cardSelector, handleCardClick, handleLikeClick, handleDislikeClick, handleDeleteClick,  userId) {
       this._name = data.name;
       this._link = data.link;
       this._id = data._id;
@@ -7,12 +7,13 @@ class Card {
       this._likes = data.likes;
 
       this._cardSelector = cardSelector;
+      this._handleCardClick = handleCardClick;
       this._handleLikeClick = handleLikeClick;
       this._handleDislikeClick = handleDislikeClick;
       this._handleDeleteClick = handleDeleteClick;
-      this._handleCardClick = handleCardClick;
       
-      this._currentUser = currentUser;
+      
+      this._userId = userId;
       
       this._element = this._getTemplate();
       this._elementImage = this._element.querySelector('.element__image');
@@ -67,7 +68,7 @@ class Card {
 
     _toggleDeleteButton() {
       // Логика для скрытия/показа кнопки удаления карточки
-      if (this._ownerId === this._currentUser._id) {
+      if (this._ownerId === this._userId._id) {
         this._elementDelete.style.display = 'block';
       } else {
         this._elementDelete.style.display = 'none';
@@ -76,7 +77,7 @@ class Card {
 
 
     isMylikeCard() {
-      return this._likes.some((user) => user._id === this._currentUser._id);;
+      return this._likes.some((user) => user._id === this._userId._id);;
     }
 
     updateLikes(likesCount) {
@@ -111,7 +112,7 @@ class Card {
 
     _checkLikeButton() {
         this._likes.forEach(like => {
-            if (like._id === this._currentUser) {
+            if (like._id === this._userId) {
                 this._likeButton.classList.add('element__like-button_active')
             }
         })
