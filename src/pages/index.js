@@ -34,9 +34,9 @@ const cardsList = new Section({
 
 
 const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-75',
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-77',
   headers: {
-    authorization: 'ce69c67a-8f47-420f-b8fa-8388f7ae2056',
+    authorization: '5f6eb5e9-3c06-4528-b1e2-80ff92f51d0b',
     'Content-Type': 'application/json'
   }
 });
@@ -51,7 +51,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
       avatar: userData.avatar
     });
 
-    userId = userData;
+    userId = userData._id;
 
     // Создание и отрисовка карточек
     cardsList.renderItems(cardsData);
